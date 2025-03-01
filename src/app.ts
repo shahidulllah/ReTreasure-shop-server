@@ -15,10 +15,9 @@ app.use(cors());
 //Application routes
 app.use("/api/users", userRoutes);
 
-
 //===================
 app.get("/", (req: Request, res: Response) => {
-  res.send("Welcome to my Stationary shop");
+  res.send("Welcome to my ReTreasure shop");
 });
 //===================
 

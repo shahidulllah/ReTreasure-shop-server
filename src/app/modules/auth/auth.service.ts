@@ -1,20 +1,24 @@
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import User from "../user/user.model";
+import { IUser } from "../user/user.interface";
+import { generateToken } from "../../utils/jwt";
 
-export const registerUser = async (name: string, email: string, password: string) => {
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const user = await User.create({ name, email, password: hashedPassword });
-  return user;
+//Registration
+export const registerUser = async (userData: IUser) => {
+  const existingUser = await User.findOne({ email: userData.email });
+  if (existingUser) throw new Error("User already exists");
+
+  const newUser = await User.create(userData);
+  return newUser.toObject();
 };
 
+//Login
 export const loginUser = async (email: string, password: string) => {
   const user = await User.findOne({ email });
-  if (!user) throw new Error("User not found");
+  if (!user) throw new Error("Invalid credentials");
 
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) throw new Error("Invalid credentials");
 
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET as string, { expiresIn: "1d" });
-  return { user, token };
+  return { ...user.toObject(), token: generateToken(user._id.toString()) };
 };

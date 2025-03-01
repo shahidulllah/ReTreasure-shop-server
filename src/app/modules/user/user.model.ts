@@ -11,6 +11,7 @@ const UserSchema = new Schema<IUserModel>(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
+    phone: { type: String, unique: true, sparse: true },
     password: { type: String, required: true },
     role: { type: String, enum: ["user", "admin"], default: "user" },
   },

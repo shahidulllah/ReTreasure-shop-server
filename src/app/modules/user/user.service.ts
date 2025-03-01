@@ -9,10 +9,7 @@ export const registerUser = async (userData: IUser) => {
   if (existingUser) throw new Error("User already exists");
 
   const newUser = await User.create(userData);
-  return {
-    ...newUser.toObject(),
-    token: generateToken(newUser._id.toString()),
-  };
+  return newUser.toObject();
 };
 
 //Login

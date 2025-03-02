@@ -25,6 +25,7 @@ const productSchema: Schema = new Schema<IProduct>(
     },
     images: { type: [String], required: true },
     inStock: { type: Boolean, required: true },
+    quantity: { type: Number, required: true },
     sellerID: { type: String, required: true },
     status: { type: String, enum: ["available", "sold"], required: true },
   },

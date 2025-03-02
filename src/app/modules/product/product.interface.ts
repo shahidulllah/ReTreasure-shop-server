@@ -12,6 +12,7 @@ export interface IProduct {
     | "Accessories";
   images: string[];
   inStock: boolean;
+  quantity: number;
   sellerID: string;
   status: "available" | "sold";
 }

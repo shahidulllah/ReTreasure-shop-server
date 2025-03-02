@@ -9,6 +9,10 @@ export const getAllOrders = async () => {
   return await Order.find().populate("user").populate("products.product");
 };
 
+export const getUserOrders = async (userId: string) => {
+    return await Order.find({ user: userId }).populate("products.product");
+  };
+
 export const getOrderById = async (id: string) => {
   return await Order.findById(id).populate("user").populate("products.product");
 };

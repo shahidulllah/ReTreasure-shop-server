@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import * as orderService from "./order.service";
+import { AuthenticatedRequest } from "../payment/payment.controller";
 
 // Create a new order
 export const createOrder = async (req: Request, res: Response) => {
@@ -30,6 +31,27 @@ export const getAllOrders = async (_req: Request, res: Response) => {
     res
       .status(400)
       .json({ message: "Failed to retrieve orders.", error: error.message });
+  }
+};
+
+//Specific user order
+export const getMyOrders = async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const userId = req.user?.userId;
+    if (!userId) {
+      res.status(404).json({ message: "User not found. Login first" });
+      return;
+    }
+    const orders = await orderService.getUserOrders(userId);
+    res
+      .status(200)
+      .json({
+        success: true,
+        message: "Orders retrieved successfully.",
+        orders,
+      });
+  } catch (error: any) {
+    res.status(400).json({ message: error.message });
   }
 };
 

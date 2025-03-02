@@ -3,15 +3,18 @@ import * as paymentService from "./payment.service";
 
 interface AuthenticatedRequest extends Request {
   user?: {
-    id: string; 
+    userId: string;
   };
 }
 
 // Create a new payment
-export const createPayment = async (req: AuthenticatedRequest, res: Response) => {
+export const createPayment = async (
+  req: AuthenticatedRequest,
+  res: Response
+) => {
   try {
     const { orderId, amount } = req.body;
-    const userId = req.user?.id;
+    const userId = req.user?.userId;
     if (!userId) {
       res.status(401).json({ message: "Unauthorized. Please log in." });
       return;

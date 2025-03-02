@@ -5,6 +5,7 @@ import connectDB from "./app/config/db";
 import { userRoutes } from "./app/modules/auth/auth.route";
 import { productRouters } from "./app/modules/product/product.route";
 import { orderRoutes } from "./app/modules/order/order.route";
+import { paymentRoutes } from "./app/modules/payment/payment.route";
 
 dotenv.config();
 connectDB();
@@ -18,6 +19,7 @@ app.use(cors());
 app.use("/api/auth", userRoutes);
 app.use("/api/products", productRouters);
 app.use("/api/orders", orderRoutes);
+app.use("/api/payments", paymentRoutes);
 
 //===================
 app.get("/", (req: Request, res: Response) => {

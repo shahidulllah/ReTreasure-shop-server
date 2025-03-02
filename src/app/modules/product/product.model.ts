@@ -23,7 +23,7 @@ const productSchema: Schema = new Schema<IProduct>(
       ],
       required: true,
     },
-    images: { type: [String], required: true },
+    image: { type: String, required: true },
     inStock: { type: Boolean, required: true },
     quantity: { type: Number, required: true },
     sellerID: { type: String, required: true },

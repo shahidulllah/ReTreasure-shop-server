@@ -10,7 +10,7 @@ export interface IProduct {
     | "Books & Media"
     | "Device"
     | "Accessories";
-  images: string[];
+  image: string;
   inStock: boolean;
   quantity: number;
   sellerID: string;

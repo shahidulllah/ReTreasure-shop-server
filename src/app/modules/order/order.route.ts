@@ -10,4 +10,4 @@ router.get("/:id", protect, orderController.getOrderById);
 router.patch("/:id/status", protect, orderController.updateOrderStatus);
 router.delete("/:id", protect, orderController.deleteOrder);
 
-export default router;
+export const orderRoutes = router;

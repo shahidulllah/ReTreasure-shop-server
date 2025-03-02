@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import * as paymentService from "./payment.service";
 
-interface AuthenticatedRequest extends Request {
+export interface AuthenticatedRequest extends Request {
   user?: {
     userId: string;
   };

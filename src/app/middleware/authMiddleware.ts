@@ -9,9 +9,12 @@ export const protect = (
   req: AuthRequest,
   res: Response,
   next: NextFunction
-) => {
+): void => {
   let token = req.headers.authorization;
-  if (!token) return res.status(401).json({ message: "Unauthorized" });
+  if (!token) {
+    res.status(401).json({ message: "Unauthorized" });
+    return;
+  }
 
   try {
     const decoded = jwt.verify(
@@ -22,5 +25,6 @@ export const protect = (
     next();
   } catch (error) {
     res.status(401).json({ message: "Invalid Token" });
+    return;
   }
 };

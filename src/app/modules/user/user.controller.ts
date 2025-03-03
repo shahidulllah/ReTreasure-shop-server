@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import * as userService from "./user.service";
 import { AuthenticatedRequest } from "../payment/payment.controller";
 
+//get user
 export const getUsers = async (req: Request, res: Response) => {
   try {
     const users = await userService.getAllUsers();
@@ -15,6 +16,7 @@ export const getUsers = async (req: Request, res: Response) => {
   }
 };
 
+//update user
 export const updateProfile = async (
   req: AuthenticatedRequest,
   res: Response
@@ -31,6 +33,16 @@ export const updateProfile = async (
       message: "Profile updated successfully",
       updatedUser,
     });
+  } catch (error: any) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+//delete
+export const removeUser = async (req: Request, res: Response) => {
+  try {
+    await userService.deleteUser(req.params.id);
+    res.status(200).json({ message: "User deleted successfully" });
   } catch (error: any) {
     res.status(400).json({ message: error.message });
   }

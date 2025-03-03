@@ -1,9 +1,11 @@
 import User from "./user.model";
 
+//get user
 export const getAllUsers = async () => {
-  return await User.find({}, "-password"); 
+  return await User.find({}, "-password");
 };
 
+//Updat user
 export const updateUserProfile = async (
   userId: string,
   updates: Partial<{
@@ -23,4 +25,9 @@ export const updateUserProfile = async (
 
   await user.save();
   return user;
+};
+
+//delete user
+export const deleteUser = async (userId: string) => {
+  return await User.findByIdAndDelete(userId);
 };

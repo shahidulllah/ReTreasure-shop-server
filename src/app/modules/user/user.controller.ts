@@ -38,6 +38,22 @@ export const updateProfile = async (
   }
 };
 
+export const updateRole = async (req: Request, res: Response) => {
+  try {
+    const updatedUser = await userService.updateUserRole(
+      req.params.id,
+      req.body.role
+    );
+    res.status(200).json({
+      success: true,
+      message: "Role is updated successfully",
+      updatedUser,
+    });
+  } catch (error: any) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 //delete
 export const removeUser = async (req: Request, res: Response) => {
   try {

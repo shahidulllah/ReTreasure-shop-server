@@ -27,6 +27,10 @@ export const updateUserProfile = async (
   return user;
 };
 
+export const updateUserRole = async (userId: string, role: string) => {
+  return await User.findByIdAndUpdate(userId, { role }, { new: true });
+};
+
 //delete user
 export const deleteUser = async (userId: string) => {
   return await User.findByIdAndDelete(userId);

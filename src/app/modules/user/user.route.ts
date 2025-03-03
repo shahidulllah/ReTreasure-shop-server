@@ -6,5 +6,6 @@ const router = express.Router();
 
 router.get("/", protect, admin, userController.getUsers);
 router.put("/profile", protect, userController.updateProfile);
+router.delete("/:id", protect, admin, userController.removeUser);
 
 export const userRoutes = router;

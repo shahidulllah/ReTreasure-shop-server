@@ -1,90 +1,90 @@
 import { Request, Response } from "express";
-import * as productService from "./listings.service";
+import { ListingService } from "./listings.service";
 
-export const createProduct = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
-  try {
-    const product = await productService.createProduct(req.body);
-    res.status(201).json({
-      success: true,
-      message: "Product is created sussessfully",
-      product,
-    });
-  } catch (error: any) {
-    res.status(400).json({ message: error.message });
-  }
-};
-
-export const getAllProducts = async (
-  _req: Request,
-  res: Response
-): Promise<void> => {
-  try {
-    const products = await productService.getAllProducts();
-    res.status(200).json({
-      success: true,
-      message: "Products are retrieved sussessfully",
-      products,
-    });
-  } catch (error: any) {
-    res.status(400).json({ message: error.message });
-  }
-};
-
-export const getProductById = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
-  try {
-    const product = await productService.getProductById(req.params.id);
-    if (!product) {
-      res.status(404).json({ message: "Product not found" });
-      return;
+export class ListingController {
+  // Create a new listing
+  static async createListing(req: Request, res: Response) {
+    try {
+      const newListing = await ListingService.createListing(req.body);
+      res.status(201).json({
+        success: true,
+        message: "Listing created successfully",
+        data: newListing,
+      });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ success: false, message: "Failed to create listing", error });
     }
-    res.status(200).json({
-      success: true,
-      message: "Product is retrieved sussessfully",
-      product,
-    });
-  } catch (error: any) {
-    res.status(400).json({ message: error.message });
   }
-};
 
-export const updateProduct = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
-  try {
-    const product = await productService.updateProduct(req.params.id, req.body);
-    if (!product) {
-      res.status(404).json({ message: "Product not found" });
-      return;
+  // Get all listings
+  static async getAllListings(req: Request, res: Response) {
+    try {
+      const listings = await ListingService.getAllListings();
+      res.status(200).json({ success: true, data: listings });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ success: false, message: "Failed to fetch listings", error });
     }
-    res.status(200).json({
-      success: true,
-      message: "Product is updated sussessfully",
-      product,
-    });
-  } catch (error: any) {
-    res.status(400).json({ message: error.message });
   }
-};
 
-export const deleteProduct = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
-  try {
-    const product = await productService.deleteProduct(req.params.id);
-    if (!product) {
-      res.status(404).json({ message: "Product not found" });
-      return;
+  // Get a listing by ID
+  static async getListingById(req: Request, res: Response) {
+    try {
+      const listing = await ListingService.getListingById(req.params.id);
+      if (!listing) {
+        res.status(404).json({ success: false, message: "Listing not found" });
+        return;
+      }
+
+      res.status(200).json({ success: true, data: listing });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ success: false, message: "Failed to fetch listing", error });
     }
-    res.status(200).json({ message: "Product deleted successfully" });
-  } catch (error: any) {
-    res.status(400).json({ message: error.message });
   }
-};
+
+  // Update a listing
+  static async updateListing(req: Request, res: Response) {
+    try {
+      const updatedListing = await ListingService.updateListing(
+        req.params.id,
+        req.body
+      );
+      if (!updatedListing) {
+        res.status(404).json({ success: false, message: "Listing not found" });
+        return;
+      }
+      res.status(200).json({
+        success: true,
+        message: "Listing updated successfully",
+        data: updatedListing,
+      });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ success: false, message: "Failed to update listing", error });
+    }
+  }
+
+  // Delete a listing
+  static async deleteListing(req: Request, res: Response) {
+    try {
+      const deletedListing = await ListingService.deleteListing(req.params.id);
+      if (!deletedListing) {
+        res.status(404).json({ success: false, message: "Listing not found" });
+        return;
+      }
+      res
+        .status(200)
+        .json({ success: true, message: "Listing deleted successfully" });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ success: false, message: "Failed to delete listing", error });
+    }
+  }
+}

@@ -1,13 +1,12 @@
 import express from "express";
-import * as productController from "./listings.controller";
-import { protect } from "../../middleware/authMiddleware";
+import { ListingController } from "./listings.controller";
 
 const router = express.Router();
 
-router.post("/", protect, productController.createProduct);
-router.get("/", protect, productController.getAllProducts);
-router.get("/:id", protect, productController.getProductById);
-router.patch("/:id", protect, productController.updateProduct);
-router.delete("/:id", protect, productController.deleteProduct);
+router.post("/", ListingController.createListing);
+router.get("/", ListingController.getAllListings);
+router.get("/:id", ListingController.getListingById);
+router.put("/:id", ListingController.updateListing);
+router.delete("/:id", ListingController.deleteListing);
 
-export const productRouters = router;
+export default router;

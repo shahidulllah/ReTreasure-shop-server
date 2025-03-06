@@ -1,14 +1,16 @@
-import mongoose, { Schema } from "mongoose";
-import { IProduct } from "./product.interface";
+import mongoose, { Document, Schema } from "mongoose";
+import { IListing } from "./listings.interface";
 
-const productSchema: Schema = new Schema<IProduct>(
+interface IListingModel extends IListing, Document {}
+
+const productSchema: Schema = new Schema<IListing>(
   {
     name: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
     condition: {
       type: String,
-      enum: ["new", "used", "refurbished"],
+      enum: ["new", "used"],
       required: true,
     },
     category: {
@@ -23,15 +25,15 @@ const productSchema: Schema = new Schema<IProduct>(
       ],
       required: true,
     },
-    image: { type: String, required: true },
+    images: { type: [String], required: true },
     inStock: { type: Boolean, required: true },
     quantity: { type: Number, required: true },
-    sellerID: { type: String, required: true },
+    userId: { type: String, required: true },
     status: { type: String, enum: ["available", "sold"], required: true },
   },
   { timestamps: true }
 );
 
-const Product = mongoose.model<IProduct>("Product", productSchema);
+const ListingModel = mongoose.model<IListingModel>("Product", productSchema);
 
-export default Product;
+export default ListingModel;

@@ -1,5 +1,5 @@
 import express from "express";
-import * as productController from "./product.controller";
+import * as productController from "./listings.controller";
 import { protect } from "../../middleware/authMiddleware";
 
 const router = express.Router();

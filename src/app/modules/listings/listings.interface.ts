@@ -1,8 +1,8 @@
-export interface IProduct {
+export interface IListing {
   name: string;
   description: string;
   price: number;
-  condition: "new" | "used" | "refurbished";
+  condition: "new" | "used";
   category:
     | "Electronics"
     | "Fashion"
@@ -10,9 +10,9 @@ export interface IProduct {
     | "Books & Media"
     | "Device"
     | "Accessories";
-  image: string;
+  images: string[];
   inStock: boolean;
   quantity: number;
-  sellerID: string;
+  userId: string;
   status: "available" | "sold";
 }

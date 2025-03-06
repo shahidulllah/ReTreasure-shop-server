@@ -2,7 +2,7 @@ import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./app/config/db";
-import { productRouters } from "./app/modules/product/product.route";
+import { productRouters } from "./app/modules/listings/listings.route";
 import { orderRoutes } from "./app/modules/order/order.route";
 import { paymentRoutes } from "./app/modules/payment/payment.route";
 import { authRoutes } from "./app/modules/auth/auth.route";

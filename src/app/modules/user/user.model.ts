@@ -12,6 +12,7 @@ const UserSchema = new Schema<IUserModel>(
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     phone: { type: String, unique: true, sparse: true },
+    image: { type: String, sparse: true, default: "https://static.vecteezy.com/system/resources/previews/002/318/271/large_2x/user-profile-icon-free-vector.jpg" },
     password: { type: String, required: true },
     role: { type: String, enum: ["user", "admin"], default: "user" },
   },

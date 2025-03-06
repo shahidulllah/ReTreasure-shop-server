@@ -1,25 +1,31 @@
-import { IProduct } from "./listings.interface";
-import Product from "./listings.model";
+import { IListing } from "./listings.interface";
+import ListingModel from "./listings.model";
 
-export const createProduct = async (productData: IProduct) => {
-  return await Product.create(productData);
-};
+export class ListingService {
+  // Create a new listing
+  static async createListing(listingData: IListing) {
+    return await ListingModel.create(listingData);
+  }
 
-export const getAllProducts = async () => {
-  return await Product.find();
-};
+  // Get all listings
+  static async getAllListings() {
+    return await ListingModel.find();
+  }
 
-export const getProductById = async (id: string) => {
-  return await Product.findById(id);
-};
+  // Get a single listing by ID
+  static async getListingById(listingId: string) {
+    return await ListingModel.findById(listingId);
+  }
 
-export const updateProduct = async (
-  id: string,
-  productData: Partial<IProduct>
-) => {
-  return await Product.findByIdAndUpdate(id, productData, { new: true });
-};
+  // Update listing details
+  static async updateListing(listingId: string, updateData: Partial<IListing>) {
+    return await ListingModel.findByIdAndUpdate(listingId, updateData, {
+      new: true,
+    });
+  }
 
-export const deleteProduct = async (id: string) => {
-  return await Product.findByIdAndDelete(id);
-};
+  // Delete a listing
+  static async deleteListing(listingId: string) {
+    return await ListingModel.findByIdAndDelete(listingId);
+  }
+}

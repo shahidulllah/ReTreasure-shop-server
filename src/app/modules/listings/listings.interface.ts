@@ -13,6 +13,6 @@ export interface IListing {
   images: string[];
   inStock: boolean;
   quantity: number;
-  userId: string;
+  userId: string | undefined;
   status: "available" | "sold";
 }

@@ -7,11 +7,10 @@ export class ListingService {
     return await ListingModel.create(listingData);
   }
 
-  // Get all listings
-  static async getAllListings() {
-    return await ListingModel.find();
+  // Get all listings with filters, search, pagination
+  static async getAllListings(filterOptions: any, skip: number, limit: number) {
+    return await ListingModel.find(filterOptions).skip(skip).limit(limit);
   }
-
   // Get a single listing by ID
   static async getListingById(listingId: string) {
     return await ListingModel.findById(listingId);

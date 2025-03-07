@@ -2,11 +2,11 @@ import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./app/config/db";
-import { productRouters } from "./app/modules/listings/listings.route";
 import { orderRoutes } from "./app/modules/order/order.route";
 import { paymentRoutes } from "./app/modules/payment/payment.route";
 import { authRoutes } from "./app/modules/auth/auth.route";
 import { userRoutes } from "./app/modules/user/user.route";
+import { listingRoutes } from "./app/modules/listings/listings.route";
 
 dotenv.config();
 connectDB();
@@ -18,7 +18,7 @@ app.use(cors());
 
 //Application routes
 app.use("/api/auth", authRoutes);
-app.use("/api/products", productRouters);
+app.use("/api/listings", listingRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/users", userRoutes);

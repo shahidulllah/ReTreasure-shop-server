@@ -3,7 +3,7 @@ import { IListing } from "./listings.interface";
 
 interface IListingModel extends IListing, Document {}
 
-const productSchema: Schema = new Schema<IListing>(
+const listingSchema: Schema = new Schema<IListing>(
   {
     name: { type: String, required: true },
     description: { type: String, required: true },
@@ -28,12 +28,12 @@ const productSchema: Schema = new Schema<IListing>(
     images: { type: [String], required: true },
     inStock: { type: Boolean, required: true },
     quantity: { type: Number, required: true },
-    userId: { type: String, required: true },
+    userId: {type: Schema.Types.ObjectId, ref: "User", required: true },
     status: { type: String, enum: ["available", "sold"], required: true },
   },
   { timestamps: true }
 );
 
-const ListingModel = mongoose.model<IListingModel>("Product", productSchema);
+const ListingModel = mongoose.model<IListingModel>("Listing", listingSchema);
 
 export default ListingModel;

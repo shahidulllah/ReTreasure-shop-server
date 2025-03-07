@@ -18,10 +18,49 @@ export class ListingController {
     }
   }
 
-  // Get all listings
+  // Get all listings with search, filter, and pagination
   static async getAllListings(req: Request, res: Response) {
     try {
-      const listings = await ListingService.getAllListings();
+      const {
+        search,
+        condition,
+        minPrice,
+        maxPrice,
+        page = 1,
+        limit = 10,
+      } = req.query;
+
+      const filterOptions: any = {};
+
+      // Search by title 
+      if (search) {
+        filterOptions.title = { $regex: search, $options: "i" };
+      }
+
+      // Filter by condition (new/used)
+      if (condition) {
+        filterOptions.condition = condition;
+      }
+
+      // Filter by price range
+      if (minPrice || maxPrice) {
+        filterOptions.price = {};
+        if (minPrice) filterOptions.price.$gte = Number(minPrice);
+        if (maxPrice) filterOptions.price.$lte = Number(maxPrice);
+      }
+
+      // Convert page & limit to numbers
+      const pageNumber = Number(page);
+      const limitNumber = Number(limit);
+      const skip = (pageNumber - 1) * limitNumber;
+
+      // Fetch listings with filters, search, pagination
+      const listings = await ListingService.getAllListings(
+        filterOptions,
+        skip,
+        limitNumber
+      );
+
       res.status(200).json({ success: true, data: listings });
     } catch (error) {
       res

@@ -5,13 +5,14 @@ export class ListingController {
   // Create a new listing
   static async createListing(req: Request, res: Response) {
     try {
-      const newListing = await ListingService.createListing(req.body);
+      const newListing = await ListingService.createListing(req.body)
       res.status(201).json({
         success: true,
         message: "Listing created successfully",
         data: newListing,
       });
     } catch (error) {
+      console.log("Error:", error);
       res
         .status(500)
         .json({ success: false, message: "Failed to create listing", error });
@@ -103,6 +104,7 @@ export class ListingController {
         data: updatedListing,
       });
     } catch (error) {
+      console.log(error);
       res
         .status(500)
         .json({ success: false, message: "Failed to update listing", error });

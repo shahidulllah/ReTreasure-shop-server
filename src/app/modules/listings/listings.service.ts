@@ -1,5 +1,6 @@
 import { IListing } from "./listings.interface";
-import ListingModel from "./listings.model";
+import { ListingModel } from "./listings.model";
+
 
 export class ListingService {
   // Create a new listing

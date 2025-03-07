@@ -1,18 +1,11 @@
 export interface IListing {
-  name: string;
+  _id?: string;
+  title: string;
   description: string;
   price: number;
-  condition: "new" | "used";
-  category:
-    | "Electronics"
-    | "Fashion"
-    | "Home & Furniture"
-    | "Books & Media"
-    | "Device"
-    | "Accessories";
-  images: string[];
-  inStock: boolean;
-  quantity: number;
-  userId: string | undefined;
+  category: string;
+  condition: string;
+  image?: string;
+  sellerId: string | undefined;
   status: "available" | "sold";
 }

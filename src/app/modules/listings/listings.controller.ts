@@ -5,7 +5,7 @@ export class ListingController {
   // Create a new listing
   static async createListing(req: Request, res: Response) {
     try {
-      const newListing = await ListingService.createListing(req.body)
+      const newListing = await ListingService.createListing(req.body);
       res.status(201).json({
         success: true,
         message: "Listing created successfully",
@@ -24,30 +24,37 @@ export class ListingController {
     try {
       const {
         search,
-        condition,
+        category,
+        location,
         minPrice,
         maxPrice,
-        page = 1,
-        limit = 10,
+        condition,
+        page,
+        limit,
       } = req.query;
+      let query: any = {};
 
-      const filterOptions: any = {};
-
-      // Search by title 
+      // Search by title or description
       if (search) {
-        filterOptions.title = { $regex: search, $options: "i" };
+        query.$or = [
+          { title: { $regex: search, $options: "i" } },
+          { description: { $regex: search, $options: "i" } }
+        ];
       }
 
-      // Filter by condition (new/used)
-      if (condition) {
-        filterOptions.condition = condition;
-      }
+      // Filter by category
+      if (category) query.category = category;
+
+      // Filter by location
+      if (location) query.location = location;
+
+      // Filter by condition (new, used)
+      if (condition) query.condition = condition;
 
       // Filter by price range
-      if (minPrice || maxPrice) {
-        filterOptions.price = {};
-        if (minPrice) filterOptions.price.$gte = Number(minPrice);
-        if (maxPrice) filterOptions.price.$lte = Number(maxPrice);
+      if (maxPrice) {
+        query.price = {};
+        if (maxPrice) query.price.$lte = Number(maxPrice);
       }
 
       // Convert page & limit to numbers
@@ -57,7 +64,7 @@ export class ListingController {
 
       // Fetch listings with filters, search, pagination
       const listings = await ListingService.getAllListings(
-        filterOptions,
+        query,
         skip,
         limitNumber
       );

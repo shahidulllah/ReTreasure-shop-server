@@ -5,6 +5,7 @@ export interface IListing {
   price: number;
   category: string;
   condition: string;
+  location: string;
   image?: string;
   sellerId: string | undefined;
   status: "available" | "sold";

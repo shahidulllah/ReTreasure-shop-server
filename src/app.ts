@@ -14,7 +14,12 @@ connectDB();
 const app: Application = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 
 //Application routes
 app.use("/api/auth", authRoutes);

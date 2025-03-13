@@ -9,6 +9,7 @@ const ListingSchema = new Schema<IListing>(
     price: { type: Number, required: true },
     category: { type: String, required: true },
     condition: { type: String, required: true },
+    location: { type: String, required: true },
     image: { type: String, default: "https://ibb.co.com/5CJnLF6" },
     sellerId: {
       type: mongoose.Schema.Types.ObjectId,

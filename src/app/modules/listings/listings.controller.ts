@@ -26,7 +26,6 @@ export class ListingController {
         search,
         category,
         location,
-        minPrice,
         maxPrice,
         condition,
         page,
@@ -38,7 +37,7 @@ export class ListingController {
       if (search) {
         query.$or = [
           { title: { $regex: search, $options: "i" } },
-          { description: { $regex: search, $options: "i" } }
+          { description: { $regex: search, $options: "i" } },
         ];
       }
 

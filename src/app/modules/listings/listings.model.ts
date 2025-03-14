@@ -16,7 +16,6 @@ const ListingSchema = new Schema<IListing>(
       ref: "User",
       required: true,
     },
-    status: { type: String, enum: ["available", "sold"], default: "available" },
   },
   { timestamps: true }
 );

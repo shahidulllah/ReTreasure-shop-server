@@ -8,5 +8,4 @@ export interface IListing {
   location: string;
   image?: string;
   sellerId: string | undefined;
-  status: "available" | "sold";
 }

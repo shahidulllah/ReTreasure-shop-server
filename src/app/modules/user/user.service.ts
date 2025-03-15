@@ -5,6 +5,11 @@ export const getAllUsers = async () => {
   return await User.find({}, "-password");
 };
 
+//delete user
+export const getSingleUser = async (userId: string) => {
+  return await User.findById(userId, "-password");
+};
+
 //Updat user
 export const updateUserProfile = async (
   userId: string,
@@ -35,3 +40,4 @@ export const updateUserRole = async (userId: string, role: string) => {
 export const deleteUser = async (userId: string) => {
   return await User.findByIdAndDelete(userId);
 };
+

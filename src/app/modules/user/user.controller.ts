@@ -16,6 +16,16 @@ export const getUsers = async (req: Request, res: Response) => {
   }
 };
 
+//get single user
+export const singleUser = async (req: Request, res: Response) => {
+  try {
+    const user = await userService.getSingleUser(req.params.id);
+    res.status(200).json({ message: "User retrieved successfully", user });
+  } catch (error: any) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 //update user
 export const updateProfile = async (
   req: AuthenticatedRequest,

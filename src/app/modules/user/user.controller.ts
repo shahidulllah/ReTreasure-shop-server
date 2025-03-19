@@ -32,12 +32,10 @@ export const updateProfile = async (
   res: Response
 ) => {
   try {
-    const userId = req.user?.userId;
-    if (!userId) {
-      res.status(401).json({ message: "Unauthorized. Please log in." });
-      return;
-    }
+    const { userId } = req.params;
+
     const updatedUser = await userService.updateUserProfile(userId, req.body);
+
     res.status(200).json({
       success: true,
       message: "Profile updated successfully",

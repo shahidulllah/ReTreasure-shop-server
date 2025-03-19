@@ -10,26 +10,15 @@ export const getSingleUser = async (userId: string) => {
   return await User.findById(userId, "-password");
 };
 
-//Updat user
-export const updateUserProfile = async (
-  userId: string,
-  updates: Partial<{
-    name: string;
-    email: string;
-    password: string;
-    phone: string;
-  }>
-) => {
-  const user = await User.findById(userId);
-  if (!user) throw new Error("User not found");
-
-  if (updates.name) user.name = updates.name;
-  if (updates.email) user.email = updates.email;
-  if (updates.phone) user.phone = updates.phone;
-  if (updates.password) user.password = updates.password;
-
-  await user.save();
-  return user;
+//Update user
+export const updateUserProfile = async (userId: string, data: any) => {
+  try {
+    const user = await User.findByIdAndUpdate(userId, data, { new: true });
+    if (!user) throw new Error("User not found");
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const updateUserRole = async (userId: string, role: string) => {

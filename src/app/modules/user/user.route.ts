@@ -6,8 +6,8 @@ import { admin } from "../../middleware/adminMiddleware";
 const router = express.Router();
 
 router.get("/", protect, admin, userController.getUsers);
-router.get("/:id", protect,userController.singleUser);
-router.put("/profile", protect, userController.updateProfile);
+router.get("/:id",userController.singleUser);
+router.put("/profile/:userId",userController.updateProfile);
 router.put("/:id", protect, admin, userController.updateRole);
 router.delete("/:id", protect, admin, userController.removeUser);
 

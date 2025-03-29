@@ -20,4 +20,4 @@ const WishlistSchema = new Schema<IListing>(
   { timestamps: true }
 );
 
-export const ListingModel = mongoose.model<IListing>("Wishlist", WishlistSchema);
+export const WishlistModel = mongoose.model<IListing>("Wishlist", WishlistSchema);

@@ -1,21 +1,23 @@
-import { IListing } from "../listings/listings.interface";
 import { WishlistModel } from "./wishlist.model";
 
-
-
 export class WishlistService {
-  // add wishlist
-  static async addWishlist(listingData: IListing) {
-    return await WishlistModel.create(listingData);
+  static async getWishlist(userId: string) {
+    return WishlistModel.findOne({ userId }).populate("items");
   }
 
-  // Get all wishlist
-  static async getWishlist() {
-    return await WishlistModel.find()
+  static async addToWishlist(userId: string, listingId: string) {
+    return WishlistModel.findOneAndUpdate(
+      { userId },
+      { $addToSet: { items: listingId } },
+      { upsert: true, new: true }
+    );
   }
 
-  // Delete a wishlist
-  static async deleteWishlist(listingId: string) {
-    return await WishlistModel.findByIdAndDelete(listingId);
+  static async removeFromWishlist(userId: string, listingId: string) {
+    return WishlistModel.findOneAndUpdate(
+      { userId },
+      { $pull: { items: listingId } },
+      { new: true }
+    );
   }
 }

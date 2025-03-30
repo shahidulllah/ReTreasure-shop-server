@@ -4,7 +4,7 @@ import { IWishlist } from "./wishlist.interface";
 const WishlistSchema = new Schema<IWishlist>(
   {
     userId: {type: String, unique: true, required: true},
-    items: [{
+    listings: [{
       type: Schema.Types.ObjectId,
       ref: "Listing",
     }],

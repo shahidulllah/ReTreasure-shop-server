@@ -2,7 +2,7 @@ import { WishlistModel } from "./wishlist.model";
 
 export class WishlistService {
   static async getWishlist(userId: string) {
-    return WishlistModel.findOne({ userId }).populate("items");
+    return WishlistModel.findOne({ userId }).populate("listings");
   }
 
   static async addToWishlist(userId: string, listingId: string) {

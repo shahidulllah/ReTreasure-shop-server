@@ -7,6 +7,7 @@ import { paymentRoutes } from "./app/modules/payment/payment.route";
 import { authRoutes } from "./app/modules/auth/auth.route";
 import { userRoutes } from "./app/modules/user/user.route";
 import { listingRoutes } from "./app/modules/listings/listings.route";
+import { wishlistRoutes } from "./app/modules/wishlist/wishlist.route";
 
 dotenv.config();
 connectDB();
@@ -27,6 +28,7 @@ app.use("/api/listings", listingRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/wishlist", wishlistRoutes);
 
 //===================
 app.get("/", (req: Request, res: Response) => {

@@ -1,23 +1,18 @@
-import mongoose, { Schema } from "mongoose";
-import { IListing } from "../listings/listings.interface";
+import { model, Schema } from "mongoose";
+import { IWishlist } from "./wishlist.interface";
 
-
-const WishlistSchema = new Schema<IListing>(
+const WishlistSchema = new Schema<IWishlist>(
   {
-    title: { type: String, required: true },
-    description: { type: String, required: true },
-    price: { type: Number, required: true },
-    category: { type: String, required: true },
-    condition: { type: String, required: true },
-    location: { type: String, required: true },
-    image: { type: String, default: "https://ibb.co.com/5CJnLF6" },
-    sellerId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
+    userId: {type: String, unique: true, required: true},
+    items: [{
+      type: Schema.Types.ObjectId,
+      ref: "Listing",
+    }],
   },
   { timestamps: true }
 );
 
-export const WishlistModel = mongoose.model<IListing>("Wishlist", WishlistSchema);
+export const WishlistModel = model<IWishlist>(
+  "Wishlist",
+  WishlistSchema
+);

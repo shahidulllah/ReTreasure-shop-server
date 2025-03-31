@@ -6,11 +6,7 @@ export class WishlistService {
   }
 
   static async addToWishlist(userId: string, listingId: string) {
-    return WishlistModel.findOneAndUpdate(
-      { userId },
-      { $addToSet: { listings: listingId } },
-      { upsert: true, new: true }
-    );
+    return WishlistModel.create({ userId, listings: listingId });
   }
 
   static async removeFromWishlist(userId: string, listingId: string) {

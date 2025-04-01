@@ -1,19 +1,38 @@
+import { IListing } from "../listings/listings.interface";
 import { WishlistModel } from "./wishlist.model";
 
-export class WishlistService {
-  static async getWishlist(userId: string) {
-    return WishlistModel.findOne({ userId }).populate("listings");
-  }
+export const WishlistService = {
+  async getWishlist(userId: string) {
+    return await WishlistModel.findOne({ userId }).populate("listings");
+  },
 
-  static async addToWishlist(userId: string, listingId: string) {
-    return WishlistModel.create({ userId, listings: listingId });
-  }
+  async addToWishlist(userId: string, listingId: IListing) {
+    let wishlist = await WishlistModel.findOne({ userId });
 
-  static async removeFromWishlist(userId: string, listingId: string) {
-    return WishlistModel.findOneAndUpdate(
+    if (!wishlist) {
+      wishlist = new WishlistModel({ userId, listings: [listingId] });
+    } else {
+      if (!wishlist.listings.includes(listingId)) {
+        wishlist.listings.push(listingId);
+      }
+    }
+
+    return await wishlist.save();
+  },
+
+  async removeFromWishlist(userId: string, listingId: string) {
+    return await WishlistModel.findOneAndUpdate(
       { userId },
-      { $pull: { items: listingId } },
+      { $pull: { listings: listingId } },
+      { new: true }
+    ).populate("listings");
+  },
+
+  async clearWishlist(userId: string) {
+    return await WishlistModel.findOneAndUpdate(
+      { userId },
+      { listings: [] },
       { new: true }
     );
-  }
-}
+  },
+};

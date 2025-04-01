@@ -1,11 +1,11 @@
-import { protect } from "../../middleware/authMiddleware";
-import { WishlistController } from "./wishlist.controller";
 import express from "express";
+import { WishlistController } from "./wishlist.controller";
 
 const router = express.Router();
 
-router.get("/", protect, WishlistController.getWishlist);
-router.post("/", protect, WishlistController.addToWishlist);
-router.delete("/:listingId", protect, WishlistController.removeFromWishlist);
+router.get("/:userId", WishlistController.getWishlist);
+router.post("/add", WishlistController.addToWishlist);
+router.post("/remove", WishlistController.removeFromWishlist);
+router.post("/clear", WishlistController.clearWishlist);
 
 export const wishlistRoutes = router;

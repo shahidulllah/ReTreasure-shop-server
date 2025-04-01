@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { model, Schema } from "mongoose";
 import { IWishlist } from "./wishlist.interface";
 
 const WishlistSchema = new Schema<IWishlist>(
@@ -7,13 +7,11 @@ const WishlistSchema = new Schema<IWishlist>(
     listings: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: "Listing",
-      required: true
     }],
   },
-  { timestamps: true }
 );
 
-export const WishlistModel = mongoose.model<IWishlist>(
+export const WishlistModel = model<IWishlist>(
   "Wishlist",
   WishlistSchema
 );

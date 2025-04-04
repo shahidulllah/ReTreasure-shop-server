@@ -8,6 +8,7 @@ import { authRoutes } from "./app/modules/auth/auth.route";
 import { userRoutes } from "./app/modules/user/user.route";
 import { listingRoutes } from "./app/modules/listings/listings.route";
 import { wishlistRoutes } from "./app/modules/wishlist/wishlist.route";
+import { transactionRoutes } from "./app/modules/transaction/transaction.route";
 
 dotenv.config();
 connectDB();
@@ -17,7 +18,7 @@ const app: Application = express();
 app.use(express.json());
 app.use(
   cors({
-    origin:"http://localhost:3000",   //https://re-treasure.vercel.app
+    origin: "http://localhost:3000", //https://re-treasure.vercel.app
     credentials: true,
   })
 );
@@ -29,6 +30,7 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/wishlist", wishlistRoutes);
+app.use("/api/transactions", transactionRoutes);
 
 //===================
 app.get("/", (req: Request, res: Response) => {

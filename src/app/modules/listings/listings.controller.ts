@@ -22,15 +22,8 @@ export class ListingController {
   // Get all listings with search, filter, and pagination
   static async getAllListings(req: Request, res: Response) {
     try {
-      const {
-        search,
-        category,
-        location,
-        maxPrice,
-        condition,
-        page,
-        limit,
-      } = req.query;
+      const { search, category, location, maxPrice, condition, page, limit } =
+        req.query;
       let query: any = {};
 
       // Search by title or description

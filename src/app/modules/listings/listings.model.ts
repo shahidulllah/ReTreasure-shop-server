@@ -1,7 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { IListing } from "./listings.interface";
 
-
 const ListingSchema = new Schema<IListing>(
   {
     title: { type: String, required: true },

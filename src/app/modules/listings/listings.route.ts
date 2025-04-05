@@ -4,10 +4,10 @@ import { protect } from "../../middleware/authMiddleware";
 
 const router = express.Router();
 
-router.post("/",protect, ListingController.createListing);
+router.post("/", protect, ListingController.createListing);
 router.get("/", ListingController.getAllListings);
 router.get("/:id", ListingController.getListingById);
-router.patch("/:id",protect, ListingController.updateListing);
-router.delete("/:id",protect, ListingController.deleteListing);
+router.patch("/:id", protect, ListingController.updateListing);
+router.delete("/:id", protect, ListingController.deleteListing);
 
 export const listingRoutes = router;

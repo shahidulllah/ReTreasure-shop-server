@@ -43,13 +43,11 @@ export const getMyOrders = async (req: AuthenticatedRequest, res: Response) => {
       return;
     }
     const orders = await orderService.getUserOrders(userId);
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: "Orders retrieved successfully.",
-        orders,
-      });
+    res.status(200).json({
+      success: true,
+      message: "Orders retrieved successfully.",
+      orders,
+    });
   } catch (error: any) {
     res.status(400).json({ message: error.message });
   }

@@ -2,7 +2,7 @@ import { IListing } from "./listings.interface";
 import { ListingModel } from "./listings.model";
 
 export class ListingService {
-  // Create a new listing
+  // Create listing
   static async createListing(listingData: IListing) {
     return await ListingModel.create(listingData);
   }
@@ -11,7 +11,7 @@ export class ListingService {
   static async getAllListings(filterOptions: any, skip: number, limit: number) {
     return await ListingModel.find(filterOptions).skip(skip).limit(limit);
   }
-  // Get a single listing by ID
+  // Get a single
   static async getListingById(listingId: string) {
     return await ListingModel.findById(listingId);
   }

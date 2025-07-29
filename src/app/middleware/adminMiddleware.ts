@@ -16,7 +16,7 @@ export const admin = async (
     const user = await User.findById(req.user.userId);
 
     if (!user || user.role !== "admin") {
-      res.status(403).json({ message: "Access denied, admin only" });
+      res.status(403).json({ message: "Access denied, only for admin" });
       return;
     }
 

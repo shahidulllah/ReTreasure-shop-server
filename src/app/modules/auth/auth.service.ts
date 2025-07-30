@@ -12,7 +12,7 @@ export const registerUser = async (userData: IUser) => {
   return newUser.toObject();
 };
 
-//Login
+//Login functionality
 export const loginUser = async (email: string, password: string) => {
   const user = await User.findOne({ email });
   if (!user) throw new Error("Invalid credentials");

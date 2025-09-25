@@ -18,7 +18,7 @@ const app: Application = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000", //https://re-treasure.vercel.app
+    origin: ["http://localhost:3000", "https://re-treasure.vercel.app"],
     credentials: true,
   })
 );

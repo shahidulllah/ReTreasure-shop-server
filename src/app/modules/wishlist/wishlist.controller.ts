@@ -32,13 +32,11 @@ export const WishlistController = {
         userId,
         listingId
       );
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "Removed successfully",
-          updatedWishlist,
-        });
+      res.status(200).json({
+        success: true,
+        message: "Removed successfully",
+        updatedWishlist,
+      });
     } catch (error: any) {
       res.status(500).json({ message: error.message });
     }
@@ -48,13 +46,11 @@ export const WishlistController = {
     try {
       const { userId } = req.body;
       const clearedWishlist = await WishlistService.clearWishlist(userId);
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "Cleared sussessfully",
-          clearedWishlist,
-        });
+      res.status(200).json({
+        success: true,
+        message: "Cleared successfully",
+        clearedWishlist,
+      });
     } catch (error: any) {
       res.status(500).json({ message: error.message });
     }

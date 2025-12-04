@@ -1,6 +1,6 @@
 import express from "express";
 import * as orderController from "./order.controller";
-import { protect } from "../../middleware/authMiddleware";
+import { protect } from "../../middlewares/authMiddleware";
 
 const router = express.Router();
 

@@ -7,4 +7,4 @@ const router = Router();
 
 router.post("/upload", upload.single("file"), uploadImage);
 
-export default router;
+export const uploadRoutes=router;

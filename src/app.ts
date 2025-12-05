@@ -9,6 +9,7 @@ import { userRoutes } from "./app/modules/user/user.route";
 import { listingRoutes } from "./app/modules/listings/listings.route";
 import { wishlistRoutes } from "./app/modules/wishlist/wishlist.route";
 import { transactionRoutes } from "./app/modules/transaction/transaction.route";
+import { uploadRoutes } from "./app/modules/upload/upload.route";
 
 dotenv.config();
 connectDB();
@@ -31,6 +32,7 @@ app.use("/api/payments", paymentRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/wishlist", wishlistRoutes);
 app.use("/api/transactions", transactionRoutes);
+app.use("/api", uploadRoutes);
 
 //===================
 app.get("/", (req: Request, res: Response) => {

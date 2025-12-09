@@ -1,6 +1,5 @@
 import { stripe } from "../../config/stripe";
 import Payment from "./payment.model";
-import { IPayment } from "./payment.interface";
 
 export const createPaymentIntent = async (
   orderId: string,

@@ -34,10 +34,8 @@ app.use("/api/wishlist", wishlistRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use("/api", uploadRoutes);
 
-//===================
 app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to my ReTreasure shop");
 });
-//===================
 
 export default app;

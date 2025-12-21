@@ -22,7 +22,6 @@ export const uploadImage = async (req: Request, res: Response) => {
       public_id: uploadResult.public_id,
     });
   } catch (error) {
-    console.log({ error });
     res.status(500).json({ message: "Upload failed", error });
   }
 };

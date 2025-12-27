@@ -66,6 +66,7 @@ export const updatePayment = async (req: Request, res: Response) => {
       payment,
     });
   } catch (error: any) {
+    console.log(error);
     res.status(400).json({
       message: "Failed to update payment status.",
       error: error.message,
